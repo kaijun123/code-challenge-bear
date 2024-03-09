@@ -1,0 +1,14 @@
+syntax = "proto3";
+package bear.bear;
+
+option go_package = "bear/x/bear/types";
+
+message Bear {
+  
+  string role = 1; 
+  string background = 2; 
+  string clothes = 3; 
+  string weapon = 4; 
+  string creator = 5; 
+  uint64 id = 6; 
+}
