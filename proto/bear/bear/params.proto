@@ -1,0 +1,15 @@
+syntax = "proto3";
+package bear.bear;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "bear/x/bear/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "bear/x/bear/Params";
+  option (gogoproto.equal) = true;
+
+  
+}

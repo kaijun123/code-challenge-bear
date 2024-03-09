@@ -1,0 +1,17 @@
+syntax = "proto3";
+package bear.bear;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "bear/bear/params.proto";
+
+option go_package = "bear/x/bear/types";
+
+// GenesisState defines the bear module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}
