@@ -39,6 +39,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgCreateBear int = 100
 
+	opWeightMsgUpdateBear = "op_weight_msg_update_bear"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgUpdateBear int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -111,6 +115,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		bearsimulation.SimulateMsgCreateBear(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
+	var weightMsgUpdateBear int
+	simState.AppParams.GetOrGenerate(opWeightMsgUpdateBear, &weightMsgUpdateBear, nil,
+		func(_ *rand.Rand) {
+			weightMsgUpdateBear = defaultWeightMsgUpdateBear
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgUpdateBear,
+		bearsimulation.SimulateMsgUpdateBear(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -148,6 +163,14 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgCreateBear,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				bearsimulation.SimulateMsgCreateBear(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgUpdateBear,
+			defaultWeightMsgUpdateBear,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				bearsimulation.SimulateMsgUpdateBear(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),
