@@ -2,7 +2,6 @@ package keeper
 
 import (
 	"encoding/binary"
-	"fmt"
 
 	types "bear/x/bear/types"
 
@@ -67,8 +66,6 @@ func (k Keeper) GetBear(ctx sdk.Context, id uint64) (val types.Bear, found bool)
 
 // SetBear
 func (k Keeper) SetBear(ctx sdk.Context, bear types.Bear) {
-	fmt.Println("id set: ", bear.Id)
-
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.BearKey))
 	b := k.cdc.MustMarshal(&bear)
