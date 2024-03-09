@@ -4,42 +4,6 @@ info:
   name: ''
   description: ''
 paths:
-  /bear/bear/params:
-    get:
-      summary: Parameters queries the parameters of the module.
-      operationId: BearBearQuery_Params
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              params:
-                description: params holds all the parameters of this module.
-                type: object
-            description: >-
-              QueryParamsResponse is response type for the Query/Params RPC
-              method.
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      tags:
-        - Query
   /bear.bear.Msg/CreateBear:
     post:
       operationId: BearBearMsg_CreateBear
@@ -230,6 +194,94 @@ paths:
             description: MsgUpdateParams is the Msg/UpdateParams request type.
       tags:
         - Msg
+  /bear/bear/params:
+    get:
+      summary: Parameters queries the parameters of the module.
+      operationId: BearBearQuery_Params
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              params:
+                description: params holds all the parameters of this module.
+                type: object
+            description: >-
+              QueryParamsResponse is response type for the Query/Params RPC
+              method.
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
+  /bear/bear/show_bear/{id}:
+    get:
+      summary: Queries a list of ShowBear items.
+      operationId: BearBearQuery_ShowBear
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              bear:
+                type: object
+                properties:
+                  role:
+                    type: string
+                  background:
+                    type: string
+                  clothes:
+                    type: string
+                  weapon:
+                    type: string
+                  creator:
+                    type: string
+                  id:
+                    type: string
+                    format: uint64
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          format: uint64
+      tags:
+        - Query
   /cosmos.auth.v1beta1.Msg/UpdateParams:
     post:
       summary: >-
@@ -19824,16 +19876,6 @@ definitions:
                   "@type": "type.googleapis.com/google.protobuf.Duration",
                   "value": "1.212s"
                 }
-  bear.bear.Params:
-    type: object
-    description: Params defines the parameters for the module.
-  bear.bear.QueryParamsResponse:
-    type: object
-    properties:
-      params:
-        description: params holds all the parameters of this module.
-        type: object
-    description: QueryParamsResponse is response type for the Query/Params RPC method.
   bear.bear.MsgCreateBear:
     type: object
     properties:
@@ -19898,6 +19940,51 @@ definitions:
     description: |-
       MsgUpdateParamsResponse defines the response structure for executing a
       MsgUpdateParams message.
+  bear.bear.Params:
+    type: object
+    description: Params defines the parameters for the module.
+  bear.bear.Bear:
+    type: object
+    properties:
+      role:
+        type: string
+      background:
+        type: string
+      clothes:
+        type: string
+      weapon:
+        type: string
+      creator:
+        type: string
+      id:
+        type: string
+        format: uint64
+  bear.bear.QueryParamsResponse:
+    type: object
+    properties:
+      params:
+        description: params holds all the parameters of this module.
+        type: object
+    description: QueryParamsResponse is response type for the Query/Params RPC method.
+  bear.bear.QueryShowBearResponse:
+    type: object
+    properties:
+      bear:
+        type: object
+        properties:
+          role:
+            type: string
+          background:
+            type: string
+          clothes:
+            type: string
+          weapon:
+            type: string
+          creator:
+            type: string
+          id:
+            type: string
+            format: uint64
   cosmos.auth.v1beta1.MsgUpdateParams:
     type: object
     properties:
