@@ -27,18 +27,6 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgCreateBear int = 100
 
-	opWeightMsgCreateBear = "op_weight_msg_create_bear"
-	// TODO: Determine the simulation weight value
-	defaultWeightMsgCreateBear int = 100
-
-	opWeightMsgCreateBear = "op_weight_msg_create_bear"
-	// TODO: Determine the simulation weight value
-	defaultWeightMsgCreateBear int = 100
-
-	opWeightMsgCreateBear = "op_weight_msg_create_bear"
-	// TODO: Determine the simulation weight value
-	defaultWeightMsgCreateBear int = 100
-
 	opWeightMsgUpdateBear = "op_weight_msg_update_bear"
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgUpdateBear int = 100
@@ -74,39 +62,6 @@ func (AppModule) ProposalContents(_ module.SimulationState) []simtypes.WeightedP
 // WeightedOperations returns the all the gov module operations with their respective weights.
 func (am AppModule) WeightedOperations(simState module.SimulationState) []simtypes.WeightedOperation {
 	operations := make([]simtypes.WeightedOperation, 0)
-
-	var weightMsgCreateBear int
-	simState.AppParams.GetOrGenerate(opWeightMsgCreateBear, &weightMsgCreateBear, nil,
-		func(_ *rand.Rand) {
-			weightMsgCreateBear = defaultWeightMsgCreateBear
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgCreateBear,
-		bearsimulation.SimulateMsgCreateBear(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
-
-	var weightMsgCreateBear int
-	simState.AppParams.GetOrGenerate(opWeightMsgCreateBear, &weightMsgCreateBear, nil,
-		func(_ *rand.Rand) {
-			weightMsgCreateBear = defaultWeightMsgCreateBear
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgCreateBear,
-		bearsimulation.SimulateMsgCreateBear(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
-
-	var weightMsgCreateBear int
-	simState.AppParams.GetOrGenerate(opWeightMsgCreateBear, &weightMsgCreateBear, nil,
-		func(_ *rand.Rand) {
-			weightMsgCreateBear = defaultWeightMsgCreateBear
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgCreateBear,
-		bearsimulation.SimulateMsgCreateBear(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
 
 	var weightMsgCreateBear int
 	simState.AppParams.GetOrGenerate(opWeightMsgCreateBear, &weightMsgCreateBear, nil,
