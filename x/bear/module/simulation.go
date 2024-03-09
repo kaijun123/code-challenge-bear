@@ -23,7 +23,19 @@ var (
 )
 
 const (
-opWeightMsgCreateBear = "op_weight_msg_create_bear"
+	opWeightMsgCreateBear = "op_weight_msg_create_bear"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgCreateBear int = 100
+
+	opWeightMsgCreateBear = "op_weight_msg_create_bear"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgCreateBear int = 100
+
+	opWeightMsgCreateBear = "op_weight_msg_create_bear"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgCreateBear int = 100
+
+	opWeightMsgCreateBear = "op_weight_msg_create_bear"
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgCreateBear int = 100
 
@@ -66,6 +78,39 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		bearsimulation.SimulateMsgCreateBear(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
+	var weightMsgCreateBear int
+	simState.AppParams.GetOrGenerate(opWeightMsgCreateBear, &weightMsgCreateBear, nil,
+		func(_ *rand.Rand) {
+			weightMsgCreateBear = defaultWeightMsgCreateBear
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgCreateBear,
+		bearsimulation.SimulateMsgCreateBear(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgCreateBear int
+	simState.AppParams.GetOrGenerate(opWeightMsgCreateBear, &weightMsgCreateBear, nil,
+		func(_ *rand.Rand) {
+			weightMsgCreateBear = defaultWeightMsgCreateBear
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgCreateBear,
+		bearsimulation.SimulateMsgCreateBear(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgCreateBear int
+	simState.AppParams.GetOrGenerate(opWeightMsgCreateBear, &weightMsgCreateBear, nil,
+		func(_ *rand.Rand) {
+			weightMsgCreateBear = defaultWeightMsgCreateBear
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgCreateBear,
+		bearsimulation.SimulateMsgCreateBear(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -75,13 +120,37 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.WeightedProposalMsg {
 	return []simtypes.WeightedProposalMsg{
 		simulation.NewWeightedProposalMsg(
-	opWeightMsgCreateBear,
-	defaultWeightMsgCreateBear,
-	func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
-		bearsimulation.SimulateMsgCreateBear(am.accountKeeper, am.bankKeeper, am.keeper)
-		return nil
-	},
-),
-// this line is used by starport scaffolding # simapp/module/OpMsg
+			opWeightMsgCreateBear,
+			defaultWeightMsgCreateBear,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				bearsimulation.SimulateMsgCreateBear(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgCreateBear,
+			defaultWeightMsgCreateBear,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				bearsimulation.SimulateMsgCreateBear(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgCreateBear,
+			defaultWeightMsgCreateBear,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				bearsimulation.SimulateMsgCreateBear(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgCreateBear,
+			defaultWeightMsgCreateBear,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				bearsimulation.SimulateMsgCreateBear(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		// this line is used by starport scaffolding # simapp/module/OpMsg
 	}
 }

@@ -29,12 +29,30 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Skip:      true, // skipped because authority gated
 				},
 				{
-			RpcMethod: "CreateBear",
-			Use: "create-bear [role] [background] [clothes] [weapon]",
-			Short: "Send a create-bear tx",
-			PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "role"}, {ProtoField: "background"}, {ProtoField: "clothes"}, {ProtoField: "weapon"},},
-		},
-		// this line is used by ignite scaffolding # autocli/tx
+					RpcMethod:      "CreateBear",
+					Use:            "create-bear [role] [background] [clothes] [weapon]",
+					Short:          "Send a create-bear tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "role"}, {ProtoField: "background"}, {ProtoField: "clothes"}, {ProtoField: "weapon"}},
+				},
+				{
+					RpcMethod:      "CreateBear",
+					Use:            "create-bear [role] [background] [clothes] [weapon]",
+					Short:          "Send a create-bear tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "role"}, {ProtoField: "background"}, {ProtoField: "clothes"}, {ProtoField: "weapon"}},
+				},
+				{
+					RpcMethod:      "CreateBear",
+					Use:            "create-bear [role] [background] [clothes] [weapon]",
+					Short:          "Send a create-bear tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "role"}, {ProtoField: "background"}, {ProtoField: "clothes"}, {ProtoField: "weapon"}},
+				},
+				{
+					RpcMethod:      "CreateBear",
+					Use:            "create-bear [role] [background] [clothes] [weapon]",
+					Short:          "Send a create-bear tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "role"}, {ProtoField: "background"}, {ProtoField: "clothes"}, {ProtoField: "weapon"}},
+				},
+				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},
 	}

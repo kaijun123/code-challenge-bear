@@ -9,20 +9,19 @@ import (
 var _ sdk.Msg = &MsgCreateBear{}
 
 func NewMsgCreateBear(creator string, role string, background string, clothes string, weapon string) *MsgCreateBear {
-  return &MsgCreateBear{
-		Creator: creator,
-    Role: role,
-    Background: background,
-    Clothes: clothes,
-    Weapon: weapon,
+	return &MsgCreateBear{
+		Creator:    creator,
+		Role:       role,
+		Background: background,
+		Clothes:    clothes,
+		Weapon:     weapon,
 	}
 }
 
 func (msg *MsgCreateBear) ValidateBasic() error {
-  _, err := sdk.AccAddressFromBech32(msg.Creator)
-  	if err != nil {
-  		return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
-  	}
-  return nil
+	_, err := sdk.AccAddressFromBech32(msg.Creator)
+	if err != nil {
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
+	}
+	return nil
 }
-

@@ -3,9 +3,10 @@ package types
 import (
 	"testing"
 
+	"bear/testutil/sample"
+
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/stretchr/testify/require"
-	"bear/testutil/sample"
 )
 
 func TestMsgCreateBear_ValidateBasic(t *testing.T) {
