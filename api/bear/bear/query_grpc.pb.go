@@ -22,6 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	Query_Params_FullMethodName   = "/bear.bear.Query/Params"
 	Query_ShowBear_FullMethodName = "/bear.bear.Query/ShowBear"
+	Query_ListBear_FullMethodName = "/bear.bear.Query/ListBear"
 )
 
 // QueryClient is the client API for Query service.
@@ -32,6 +33,8 @@ type QueryClient interface {
 	Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error)
 	// Queries a list of ShowBear items.
 	ShowBear(ctx context.Context, in *QueryShowBearRequest, opts ...grpc.CallOption) (*QueryShowBearResponse, error)
+	// Queries a list of ListBear items.
+	ListBear(ctx context.Context, in *QueryListBearRequest, opts ...grpc.CallOption) (*QueryListBearResponse, error)
 }
 
 type queryClient struct {
@@ -60,6 +63,15 @@ func (c *queryClient) ShowBear(ctx context.Context, in *QueryShowBearRequest, op
 	return out, nil
 }
 
+func (c *queryClient) ListBear(ctx context.Context, in *QueryListBearRequest, opts ...grpc.CallOption) (*QueryListBearResponse, error) {
+	out := new(QueryListBearResponse)
+	err := c.cc.Invoke(ctx, Query_ListBear_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 // All implementations must embed UnimplementedQueryServer
 // for forward compatibility
@@ -68,6 +80,8 @@ type QueryServer interface {
 	Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error)
 	// Queries a list of ShowBear items.
 	ShowBear(context.Context, *QueryShowBearRequest) (*QueryShowBearResponse, error)
+	// Queries a list of ListBear items.
+	ListBear(context.Context, *QueryListBearRequest) (*QueryListBearResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -80,6 +94,9 @@ func (UnimplementedQueryServer) Params(context.Context, *QueryParamsRequest) (*Q
 }
 func (UnimplementedQueryServer) ShowBear(context.Context, *QueryShowBearRequest) (*QueryShowBearResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ShowBear not implemented")
+}
+func (UnimplementedQueryServer) ListBear(context.Context, *QueryListBearRequest) (*QueryListBearResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBear not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -130,6 +147,24 @@ func _Query_ShowBear_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_ListBear_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryListBearRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ListBear(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_ListBear_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ListBear(ctx, req.(*QueryListBearRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Query_ServiceDesc is the grpc.ServiceDesc for Query service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -144,6 +179,10 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ShowBear",
 			Handler:    _Query_ShowBear_Handler,
+		},
+		{
+			MethodName: "ListBear",
+			Handler:    _Query_ListBear_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
