@@ -89,6 +89,46 @@ paths:
                 type: string
       tags:
         - Msg
+  /bear.bear.Msg/DeleteBear:
+    post:
+      operationId: BearBearMsg_DeleteBear
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              id:
+                type: string
+                format: uint64
+      tags:
+        - Msg
   /bear.bear.Msg/UpdateBear:
     post:
       operationId: BearBearMsg_UpdateBear
@@ -19813,6 +19853,16 @@ definitions:
       id:
         type: string
         format: uint64
+  bear.bear.MsgDeleteBear:
+    type: object
+    properties:
+      creator:
+        type: string
+      id:
+        type: string
+        format: uint64
+  bear.bear.MsgDeleteBearResponse:
+    type: object
   bear.bear.MsgUpdateBear:
     type: object
     properties:

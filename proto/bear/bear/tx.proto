@@ -19,6 +19,7 @@ service Msg {
   rpc UpdateParams (MsgUpdateParams) returns (MsgUpdateParamsResponse);
   rpc CreateBear   (MsgCreateBear  ) returns (MsgCreateBearResponse  );
   rpc UpdateBear   (MsgUpdateBear  ) returns (MsgUpdateBearResponse  );
+  rpc DeleteBear   (MsgDeleteBear  ) returns (MsgDeleteBearResponse  );
 }
 // MsgUpdateParams is the Msg/UpdateParams request type.
 message MsgUpdateParams {
@@ -62,4 +63,12 @@ message MsgUpdateBear {
 }
 
 message MsgUpdateBearResponse {}
+
+message MsgDeleteBear {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  uint64 id      = 2;
+}
+
+message MsgDeleteBearResponse {}
 

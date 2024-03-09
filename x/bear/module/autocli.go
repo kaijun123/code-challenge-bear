@@ -58,6 +58,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a update-bear tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "role"}, {ProtoField: "background"}, {ProtoField: "clothes"}, {ProtoField: "weapon"}, {ProtoField: "id"}},
 				},
+				{
+					RpcMethod:      "DeleteBear",
+					Use:            "delete-bear [id]",
+					Short:          "Send a delete-bear tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},

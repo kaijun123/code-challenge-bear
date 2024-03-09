@@ -23,6 +23,7 @@ const (
 	Msg_UpdateParams_FullMethodName = "/bear.bear.Msg/UpdateParams"
 	Msg_CreateBear_FullMethodName   = "/bear.bear.Msg/CreateBear"
 	Msg_UpdateBear_FullMethodName   = "/bear.bear.Msg/UpdateBear"
+	Msg_DeleteBear_FullMethodName   = "/bear.bear.Msg/DeleteBear"
 )
 
 // MsgClient is the client API for Msg service.
@@ -34,6 +35,7 @@ type MsgClient interface {
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
 	CreateBear(ctx context.Context, in *MsgCreateBear, opts ...grpc.CallOption) (*MsgCreateBearResponse, error)
 	UpdateBear(ctx context.Context, in *MsgUpdateBear, opts ...grpc.CallOption) (*MsgUpdateBearResponse, error)
+	DeleteBear(ctx context.Context, in *MsgDeleteBear, opts ...grpc.CallOption) (*MsgDeleteBearResponse, error)
 }
 
 type msgClient struct {
@@ -71,6 +73,15 @@ func (c *msgClient) UpdateBear(ctx context.Context, in *MsgUpdateBear, opts ...g
 	return out, nil
 }
 
+func (c *msgClient) DeleteBear(ctx context.Context, in *MsgDeleteBear, opts ...grpc.CallOption) (*MsgDeleteBearResponse, error) {
+	out := new(MsgDeleteBearResponse)
+	err := c.cc.Invoke(ctx, Msg_DeleteBear_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility
@@ -80,6 +91,7 @@ type MsgServer interface {
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
 	CreateBear(context.Context, *MsgCreateBear) (*MsgCreateBearResponse, error)
 	UpdateBear(context.Context, *MsgUpdateBear) (*MsgUpdateBearResponse, error)
+	DeleteBear(context.Context, *MsgDeleteBear) (*MsgDeleteBearResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -95,6 +107,9 @@ func (UnimplementedMsgServer) CreateBear(context.Context, *MsgCreateBear) (*MsgC
 }
 func (UnimplementedMsgServer) UpdateBear(context.Context, *MsgUpdateBear) (*MsgUpdateBearResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateBear not implemented")
+}
+func (UnimplementedMsgServer) DeleteBear(context.Context, *MsgDeleteBear) (*MsgDeleteBearResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteBear not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -163,6 +178,24 @@ func _Msg_UpdateBear_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_DeleteBear_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgDeleteBear)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).DeleteBear(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_DeleteBear_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).DeleteBear(ctx, req.(*MsgDeleteBear))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -181,6 +214,10 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateBear",
 			Handler:    _Msg_UpdateBear_Handler,
+		},
+		{
+			MethodName: "DeleteBear",
+			Handler:    _Msg_DeleteBear_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
