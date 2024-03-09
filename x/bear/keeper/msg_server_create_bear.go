@@ -12,7 +12,19 @@ func (k msgServer) CreateBear(goCtx context.Context, msg *types.MsgCreateBear) (
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	// TODO: Handling the message
-	_ = ctx
+	var bear = types.Bear{
+		Role:       msg.Role,
+		Background: msg.Background,
+		Clothes:    msg.Clothes,
+		Weapon:     msg.Weapon,
+		Creator:    msg.Creator,
+	}
 
-	return &types.MsgCreateBearResponse{}, nil
+	id := k.AppendBear(
+		ctx,
+		bear,
+	)
+	return &types.MsgCreateBearResponse{
+		Id: id,
+	}, nil
 }

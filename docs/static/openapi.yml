@@ -15,21 +15,23 @@ paths:
             type: object
             properties:
               bear:
-                type: object
-                properties:
-                  role:
-                    type: string
-                  background:
-                    type: string
-                  clothes:
-                    type: string
-                  weapon:
-                    type: string
-                  creator:
-                    type: string
-                  id:
-                    type: string
-                    format: uint64
+                type: array
+                items:
+                  type: object
+                  properties:
+                    role:
+                      type: string
+                    background:
+                      type: string
+                    clothes:
+                      type: string
+                    weapon:
+                      type: string
+                    creator:
+                      type: string
+                    id:
+                      type: string
+                      format: uint64
               pagination:
                 type: object
                 properties:
@@ -20030,21 +20032,23 @@ definitions:
     type: object
     properties:
       bear:
-        type: object
-        properties:
-          role:
-            type: string
-          background:
-            type: string
-          clothes:
-            type: string
-          weapon:
-            type: string
-          creator:
-            type: string
-          id:
-            type: string
-            format: uint64
+        type: array
+        items:
+          type: object
+          properties:
+            role:
+              type: string
+            background:
+              type: string
+            clothes:
+              type: string
+            weapon:
+              type: string
+            creator:
+              type: string
+            id:
+              type: string
+              format: uint64
       pagination:
         type: object
         properties:

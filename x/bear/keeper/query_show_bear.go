@@ -6,6 +6,7 @@ import (
 	"bear/x/bear/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
@@ -18,7 +19,10 @@ func (k Keeper) ShowBear(goCtx context.Context, req *types.QueryShowBearRequest)
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	// TODO: Process the query
-	_ = ctx
+	bear, found := k.GetBear(ctx, req.Id)
+	if !found {
+		return nil, sdkerrors.ErrKeyNotFound
+	}
 
-	return &types.QueryShowBearResponse{}, nil
+	return &types.QueryShowBearResponse{Bear: bear}, nil
 }

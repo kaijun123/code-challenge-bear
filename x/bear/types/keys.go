@@ -18,3 +18,9 @@ var (
 func KeyPrefix(p string) []byte {
 	return []byte(p)
 }
+
+const (
+	BearKey = "Bear/value/"
+
+	BearCountKey = "Bear/count/"
+)

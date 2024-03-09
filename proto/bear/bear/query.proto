@@ -47,7 +47,7 @@ message QueryShowBearRequest {
 }
 
 message QueryShowBearResponse {
-  Bear bear = 1;
+  Bear bear = 1 [(gogoproto.nullable) = false];
 }
 
 message QueryListBearRequest {
@@ -55,7 +55,7 @@ message QueryListBearRequest {
 }
 
 message QueryListBearResponse {
-  Bear                                   bear       = 1;
+  repeated Bear bear = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
