@@ -26,9 +26,9 @@ func (k msgServer) UpdateBear(goCtx context.Context, msg *types.MsgUpdateBear) (
 		Id:         msg.Id,
 	}
 	val, found := k.GetBear(ctx, msg.Id)
-	fmt.Println("Update Bear: id retrieved from store: ", val.Id)
+	// fmt.Println("Update Bear: id retrieved from store: ", val.Id)
 
-	fmt.Println("Update Bear: value of found: ", found)
+	// fmt.Println("Update Bear: value of found: ", found)
 	if !found {
 		fmt.Println("Update Bear: failed")
 		return nil, errorsmod.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %d doesn't exist", msg.Id))
@@ -42,6 +42,6 @@ func (k msgServer) UpdateBear(goCtx context.Context, msg *types.MsgUpdateBear) (
 
 	k.SetBear(ctx, bear)
 
-	fmt.Println("Update Bear: success")
+	// fmt.Println("Update Bear: success")
 	return &types.MsgUpdateBearResponse{}, nil
 }
