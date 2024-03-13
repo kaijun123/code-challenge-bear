@@ -70,6 +70,13 @@ beard tx bear delete-bear 1 --from bob --chain-id bear
 ```
 
 ## Consensus Breaking Change
+- Breaking consensus refers to causing the different nodes in the blockchain network to not be able to agree on the actual state of the blockchain, even though the transaction is valid. This could be due to the different nodes in the blockchain network having a different state.
+
+- In order to break the consensus, I have chosen to change the way in which the node processes create-bear and delete-bear messages.
+
+- On nodes with the breaking change, a bear with an empty role, background, clothes and weapon will be created when a create-bear transaction message is received even though the role, background, clothes and weapon is provided.
+
+- Similarly, on nodes with the breaking change, the bear specified in the delete-bear transaction will not be deleted.
 
 ## Get started
 
