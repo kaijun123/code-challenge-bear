@@ -24,6 +24,7 @@ const (
 	Query_ListBear_FullMethodName           = "/bear.bear.Query/ListBear"
 	Query_ListBearRole_FullMethodName       = "/bear.bear.Query/ListBearRole"
 	Query_ListBearBackground_FullMethodName = "/bear.bear.Query/ListBearBackground"
+	Query_ListBearClothes_FullMethodName    = "/bear.bear.Query/ListBearClothes"
 )
 
 // QueryClient is the client API for Query service.
@@ -40,6 +41,8 @@ type QueryClient interface {
 	ListBearRole(ctx context.Context, in *QueryListBearRoleRequest, opts ...grpc.CallOption) (*QueryListBearRoleResponse, error)
 	// Queries a list of ListBearBackground items.
 	ListBearBackground(ctx context.Context, in *QueryListBearBackgroundRequest, opts ...grpc.CallOption) (*QueryListBearBackgroundResponse, error)
+	// Queries a list of ListBearClothes items.
+	ListBearClothes(ctx context.Context, in *QueryListBearClothesRequest, opts ...grpc.CallOption) (*QueryListBearClothesResponse, error)
 }
 
 type queryClient struct {
@@ -95,6 +98,15 @@ func (c *queryClient) ListBearBackground(ctx context.Context, in *QueryListBearB
 	return out, nil
 }
 
+func (c *queryClient) ListBearClothes(ctx context.Context, in *QueryListBearClothesRequest, opts ...grpc.CallOption) (*QueryListBearClothesResponse, error) {
+	out := new(QueryListBearClothesResponse)
+	err := c.cc.Invoke(ctx, Query_ListBearClothes_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 // All implementations must embed UnimplementedQueryServer
 // for forward compatibility
@@ -109,6 +121,8 @@ type QueryServer interface {
 	ListBearRole(context.Context, *QueryListBearRoleRequest) (*QueryListBearRoleResponse, error)
 	// Queries a list of ListBearBackground items.
 	ListBearBackground(context.Context, *QueryListBearBackgroundRequest) (*QueryListBearBackgroundResponse, error)
+	// Queries a list of ListBearClothes items.
+	ListBearClothes(context.Context, *QueryListBearClothesRequest) (*QueryListBearClothesResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -130,6 +144,9 @@ func (UnimplementedQueryServer) ListBearRole(context.Context, *QueryListBearRole
 }
 func (UnimplementedQueryServer) ListBearBackground(context.Context, *QueryListBearBackgroundRequest) (*QueryListBearBackgroundResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBearBackground not implemented")
+}
+func (UnimplementedQueryServer) ListBearClothes(context.Context, *QueryListBearClothesRequest) (*QueryListBearClothesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBearClothes not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -234,6 +251,24 @@ func _Query_ListBearBackground_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_ListBearClothes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryListBearClothesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ListBearClothes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_ListBearClothes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ListBearClothes(ctx, req.(*QueryListBearClothesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Query_ServiceDesc is the grpc.ServiceDesc for Query service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -260,6 +295,10 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListBearBackground",
 			Handler:    _Query_ListBearBackground_Handler,
+		},
+		{
+			MethodName: "ListBearClothes",
+			Handler:    _Query_ListBearClothes_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

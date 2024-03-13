@@ -45,6 +45,13 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "background"}},
 				},
 
+				{
+					RpcMethod:      "ListBearClothes",
+					Use:            "list-bear-clothes [clothes]",
+					Short:          "Query list-bear-clothes",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "clothes"}},
+				},
+
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},
