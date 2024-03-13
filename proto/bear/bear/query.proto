@@ -49,6 +49,12 @@ service Query {
     option (google.api.http).get = "/bear/bear/list_bear_clothes/{clothes}";
   
   }
+  
+  // Queries a list of ListBearWeapon items.
+  rpc ListBearWeapon (QueryListBearWeaponRequest) returns (QueryListBearWeaponResponse) {
+    option (google.api.http).get = "/bear/bear/list_bear_weapon/{weapon}";
+  
+  }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
@@ -103,6 +109,16 @@ message QueryListBearClothesRequest {
 }
 
 message QueryListBearClothesResponse {
+  repeated Bear bear = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryListBearWeaponRequest {
+  string                                weapon     = 1;
+  cosmos.base.query.v1beta1.PageRequest pagination = 2;
+}
+
+message QueryListBearWeaponResponse {
   repeated Bear bear = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
