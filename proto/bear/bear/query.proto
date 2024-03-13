@@ -37,6 +37,12 @@ service Query {
     option (google.api.http).get = "/bear/bear/list_bear_role/{role}";
   
   }
+  
+  // Queries a list of ListBearBackground items.
+  rpc ListBearBackground (QueryListBearBackgroundRequest) returns (QueryListBearBackgroundResponse) {
+    option (google.api.http).get = "/bear/bear/list_bear_background/{background}";
+  
+  }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
@@ -71,6 +77,16 @@ message QueryListBearRoleRequest {
 }
 
 message QueryListBearRoleResponse {
+  repeated Bear bear = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryListBearBackgroundRequest {
+  string                                background = 1;
+  cosmos.base.query.v1beta1.PageRequest pagination = 2;
+}
+
+message QueryListBearBackgroundResponse {
   repeated Bear bear = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }

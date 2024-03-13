@@ -38,6 +38,13 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "role"}},
 				},
 
+				{
+					RpcMethod:      "ListBearBackground",
+					Use:            "list-bear-background [background]",
+					Short:          "Query list-bear-background",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "background"}},
+				},
+
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},
