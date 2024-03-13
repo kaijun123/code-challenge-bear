@@ -26,6 +26,7 @@ const (
 	Query_ListBearBackground_FullMethodName = "/bear.bear.Query/ListBearBackground"
 	Query_ListBearClothes_FullMethodName    = "/bear.bear.Query/ListBearClothes"
 	Query_ListBearWeapon_FullMethodName     = "/bear.bear.Query/ListBearWeapon"
+	Query_ListBearCreator_FullMethodName    = "/bear.bear.Query/ListBearCreator"
 )
 
 // QueryClient is the client API for Query service.
@@ -46,6 +47,8 @@ type QueryClient interface {
 	ListBearClothes(ctx context.Context, in *QueryListBearClothesRequest, opts ...grpc.CallOption) (*QueryListBearClothesResponse, error)
 	// Queries a list of ListBearWeapon items.
 	ListBearWeapon(ctx context.Context, in *QueryListBearWeaponRequest, opts ...grpc.CallOption) (*QueryListBearWeaponResponse, error)
+	// Queries a list of ListBearCreator items.
+	ListBearCreator(ctx context.Context, in *QueryListBearCreatorRequest, opts ...grpc.CallOption) (*QueryListBearCreatorResponse, error)
 }
 
 type queryClient struct {
@@ -119,6 +122,15 @@ func (c *queryClient) ListBearWeapon(ctx context.Context, in *QueryListBearWeapo
 	return out, nil
 }
 
+func (c *queryClient) ListBearCreator(ctx context.Context, in *QueryListBearCreatorRequest, opts ...grpc.CallOption) (*QueryListBearCreatorResponse, error) {
+	out := new(QueryListBearCreatorResponse)
+	err := c.cc.Invoke(ctx, Query_ListBearCreator_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 // All implementations must embed UnimplementedQueryServer
 // for forward compatibility
@@ -137,6 +149,8 @@ type QueryServer interface {
 	ListBearClothes(context.Context, *QueryListBearClothesRequest) (*QueryListBearClothesResponse, error)
 	// Queries a list of ListBearWeapon items.
 	ListBearWeapon(context.Context, *QueryListBearWeaponRequest) (*QueryListBearWeaponResponse, error)
+	// Queries a list of ListBearCreator items.
+	ListBearCreator(context.Context, *QueryListBearCreatorRequest) (*QueryListBearCreatorResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -164,6 +178,9 @@ func (UnimplementedQueryServer) ListBearClothes(context.Context, *QueryListBearC
 }
 func (UnimplementedQueryServer) ListBearWeapon(context.Context, *QueryListBearWeaponRequest) (*QueryListBearWeaponResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBearWeapon not implemented")
+}
+func (UnimplementedQueryServer) ListBearCreator(context.Context, *QueryListBearCreatorRequest) (*QueryListBearCreatorResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBearCreator not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -304,6 +321,24 @@ func _Query_ListBearWeapon_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_ListBearCreator_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryListBearCreatorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ListBearCreator(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_ListBearCreator_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ListBearCreator(ctx, req.(*QueryListBearCreatorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Query_ServiceDesc is the grpc.ServiceDesc for Query service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -338,6 +373,10 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListBearWeapon",
 			Handler:    _Query_ListBearWeapon_Handler,
+		},
+		{
+			MethodName: "ListBearCreator",
+			Handler:    _Query_ListBearCreator_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

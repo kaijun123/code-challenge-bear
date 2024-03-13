@@ -55,6 +55,12 @@ service Query {
     option (google.api.http).get = "/bear/bear/list_bear_weapon/{weapon}";
   
   }
+  
+  // Queries a list of ListBearCreator items.
+  rpc ListBearCreator (QueryListBearCreatorRequest) returns (QueryListBearCreatorResponse) {
+    option (google.api.http).get = "/bear/bear/list_bear_creator/{creator}";
+  
+  }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
@@ -79,8 +85,8 @@ message QueryListBearRequest {
 }
 
 message QueryListBearResponse {
-  repeated Bear bear = 1 [(gogoproto.nullable) = false];
-  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+  repeated Bear                                   bear       = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 message QueryListBearRoleRequest {
@@ -119,6 +125,16 @@ message QueryListBearWeaponRequest {
 }
 
 message QueryListBearWeaponResponse {
+  repeated Bear bear = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryListBearCreatorRequest {
+  string                                creator    = 1;
+  cosmos.base.query.v1beta1.PageRequest pagination = 2;
+}
+
+message QueryListBearCreatorResponse {
   repeated Bear bear = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
